@@ -1,0 +1,53 @@
+apply plugin: 'com.android.application'
+
+android {
+    signingConfigs {
+        debug {
+            storeFile file('/Users/Xiangshifu/Documents/DaiMa/GaoDeAmap/keystore/keystore')
+            storePassword '123456'
+            keyAlias 'Androidtest'
+            keyPassword '123456'
+        }
+    }
+    compileSdkVersion 29
+
+    defaultConfig {
+        applicationId "com.gaodeamap.test.demo"
+        minSdkVersion 19
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        ndk{
+            //设置支持的SO库架构（开发者可以根据需要，选择一个或多个平台的so）
+            abiFilters "armeabi", "armeabi-v7a", "arm64-v8a", "x86","x86_64"
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    //3D地图so及jar
+    implementation 'com.amap.api:3dmap:7.6.0'
+     //定位功能
+    implementation 'com.amap.api:location:5.1.0'
+    //搜索功能
+    implementation 'com.amap.api:search:7.6.0'
+
+    implementation 'com.github.NewHuLe:AppUpdate:v1.7'
+    implementation 'androidx.navigation:navigation-fragment:2.3.0'
+    implementation 'androidx.navigation:navigation-ui:2.3.0'
+
+
+}
